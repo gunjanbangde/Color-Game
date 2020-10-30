@@ -12,24 +12,27 @@ for (var i = 0; i < squares.length; i++) {
     //Event Listeners to all squares
     squares[i].addEventListener("click", function () {
         var clickedColor = this.style.backgroundColor;
+        //Correct Color Clicked
         if (clickedColor == pickedColor) {
             displayMessage.textContent = "Correct";
             for (var i = 0; i < squares.length; i++) {
                 //Change heading and all squares to correct color
-                squares[i].style.backgroundColor = pickedColor;
                 document.querySelector("h1").style.backgroundColor = pickedColor;
+                squares[i].style.backgroundColor = pickedColor;
             }
         }
+        //Incorrect Click
         else {
             //For wrong Selection
             displayMessage.textContent = "Try Again!";
+            //Disapper the incorrect squares
             this.style.backgroundColor = "#232323"
         }
     });
 }
 
+//Pick the correct answer color from arrray
 function pickColorFromArray() {
-    //Pick the correct answer color from arrray
     var random = Math.floor(Math.random() * colors.length);
     return colors[random];
 }
