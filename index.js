@@ -3,6 +3,7 @@ var pickedColor = pickColorFromArray();
 var squares = document.getElementsByClassName("square");
 var colorDisplay = document.getElementById("colorDisplay");
 var displayMessage = document.getElementById("displayMessage");
+var resetButton = document.querySelector("#reset");
 
 colorDisplay.textContent = pickedColor;
 
@@ -19,6 +20,8 @@ for (var i = 0; i < squares.length; i++) {
                 //Change heading and all squares to correct color
                 document.querySelector("h1").style.backgroundColor = pickedColor;
                 squares[i].style.backgroundColor = pickedColor;
+                //Change the text of reset button on correct guess
+                resetButton.textContent = "Play Again?";
             }
         }
         //Incorrect Click
@@ -30,6 +33,24 @@ for (var i = 0; i < squares.length; i++) {
         }
     });
 }
+
+//Reset Button and get New Colors
+resetButton.addEventListener("click", function () {
+    //Generate new colors
+    colors = generateArrayOfRandomColor(6);
+    //Appy new colors to squares
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
+    }
+    //Select a new correct color from the array of newly generated colors
+    pickedColor = pickColorFromArray();
+    //Change the text of reset button after correct guess
+    resetButton.textContent = "New Colors";
+    //Change the h1 content with new correct color
+    colorDisplay.textContent = pickedColor;
+    //Reset the heading color for new gamr after correct guess
+    document.querySelector("h1").style.backgroundColor = "#232323";
+});
 
 //Pick the correct answer color from arrray
 function pickColorFromArray() {
