@@ -9,9 +9,11 @@ var easyButton = document.getElementById("easyButton");
 var hardButton = document.getElementById("hardButton");
 
 easyButton.addEventListener("click", function () {
+    //toggle select format for easy and hard button
     easyButton.classList.add("selected");
     hardButton.classList.remove("selected");
-    document.querySelector("h1").style.backgroundColor = "#232323";
+    //change background after correct answer
+    document.querySelector("h1").style.backgroundColor = "steelblue";
     numSquares=3;
     colors = generateArrayOfRandomColor(numSquares);
     pickedColor = pickColorFromArray();
@@ -26,10 +28,11 @@ easyButton.addEventListener("click", function () {
         }
     }
 });
+
 hardButton.addEventListener("click", function () {
     easyButton.classList.remove("selected");
     hardButton.classList.add("selected"); 
-    document.querySelector("h1").style.backgroundColor = "#232323";
+    document.querySelector("h1").style.backgroundColor = "steelblue";
     numSquares=6;
     colors = generateArrayOfRandomColor(numSquares);
     pickedColor = pickColorFromArray();
@@ -43,7 +46,6 @@ hardButton.addEventListener("click", function () {
 });
 
 colorDisplay.textContent = pickedColor;
-
 for (var i = 0; i < squares.length; i++) {
     //Appy colors to squares
     squares[i].style.backgroundColor = colors[i];
@@ -86,7 +88,7 @@ resetButton.addEventListener("click", function () {
     //Change the h1 content with new correct color
     colorDisplay.textContent = pickedColor;
     //Reset the heading color for new gamr after correct guess
-    document.querySelector("h1").style.backgroundColor = "#232323";
+    document.querySelector("h1").style.backgroundColor = "steelblue";
     displayMessage.textContent = "";
 });
 
