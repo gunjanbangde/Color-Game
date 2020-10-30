@@ -1,4 +1,4 @@
-var numSquares=6;
+var numSquares = 6;
 var colors = generateArrayOfRandomColor(numSquares);
 var pickedColor = pickColorFromArray();
 var squares = document.getElementsByClassName("square");
@@ -37,18 +37,17 @@ for (var i = 0; i < squares.length; i++) {
 }
 
 //Function for new colors in diffrent cases
-function reset(){
+function reset() {
     //Generate new colors
     colors = generateArrayOfRandomColor(numSquares);
     //Appy new colors to squares
     for (var i = 0; i < squares.length; i++) {
-        if(colors[i])
-        {
-            squares[i].style.display="block";
+        if (colors[i]) {
+            squares[i].style.display = "block";
             squares[i].style.backgroundColor = colors[i];
         }
-        else{
-            squares[i].style.display="none";
+        else {
+            squares[i].style.display = "none";
         }
     }
     //Reset the heading color for new gamr after correct guess
@@ -65,15 +64,15 @@ easyButton.addEventListener("click", function () {
     //toggle select format for easy and hard button
     easyButton.classList.add("selected");
     hardButton.classList.remove("selected");
-    numSquares=3;
+    numSquares = 3;
     reset();
 });
 
 //For Hard Mode
 hardButton.addEventListener("click", function () {
     easyButton.classList.remove("selected");
-    hardButton.classList.add("selected"); 
-    numSquares=6;
+    hardButton.classList.add("selected");
+    numSquares = 6;
     reset();
 });
 
