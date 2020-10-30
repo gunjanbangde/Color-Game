@@ -8,43 +8,6 @@ var resetButton = document.querySelector("#reset");
 var easyButton = document.getElementById("easyButton");
 var hardButton = document.getElementById("hardButton");
 
-easyButton.addEventListener("click", function () {
-    //toggle select format for easy and hard button
-    easyButton.classList.add("selected");
-    hardButton.classList.remove("selected");
-    //change background after correct answer
-    document.querySelector("h1").style.backgroundColor = "steelblue";
-    numSquares=3;
-    colors = generateArrayOfRandomColor(numSquares);
-    pickedColor = pickColorFromArray();
-    colorDisplay.textContent = pickedColor;
-    displayMessage.textContent = "";
-    for (var i = 0; i < squares.length; i++) {
-        if (colors[i]) {
-            squares[i].style.backgroundColor = colors[i];
-        }
-        else {
-            squares[i].style.display = "none";
-        }
-    }
-});
-
-hardButton.addEventListener("click", function () {
-    easyButton.classList.remove("selected");
-    hardButton.classList.add("selected"); 
-    document.querySelector("h1").style.backgroundColor = "steelblue";
-    numSquares=6;
-    colors = generateArrayOfRandomColor(numSquares);
-    pickedColor = pickColorFromArray();
-    colorDisplay.textContent = pickedColor;
-    displayMessage.textContent = "";
-    for (var i = 0; i < squares.length; i++) {
-        squares[i].style.backgroundColor = colors[i];
-        squares[i].style.display = "block";
-
-    }
-});
-
 colorDisplay.textContent = pickedColor;
 for (var i = 0; i < squares.length; i++) {
     //Appy colors to squares
@@ -73,23 +36,53 @@ for (var i = 0; i < squares.length; i++) {
     });
 }
 
-//Reset Button and get New Colors
-resetButton.addEventListener("click", function () {
+//Function for new colors in diffrent cases
+function reset(){
     //Generate new colors
     colors = generateArrayOfRandomColor(numSquares);
     //Appy new colors to squares
     for (var i = 0; i < squares.length; i++) {
-        squares[i].style.backgroundColor = colors[i];
+        if(colors[i])
+        {
+            squares[i].style.display="block";
+            squares[i].style.backgroundColor = colors[i];
+        }
+        else{
+            squares[i].style.display="none";
+        }
     }
-    //Select a new correct color from the array of newly generated colors
-    pickedColor = pickColorFromArray();
-    //Change the text of reset button after correct guess
-    resetButton.textContent = "New Colors";
-    //Change the h1 content with new correct color
-    colorDisplay.textContent = pickedColor;
     //Reset the heading color for new gamr after correct guess
     document.querySelector("h1").style.backgroundColor = "steelblue";
+    //Select a new correct color from the array of newly generated colors
+    pickedColor = pickColorFromArray();
+    //Change the h1 content with new correct color
+    colorDisplay.textContent = pickedColor;
     displayMessage.textContent = "";
+}
+
+//For Easy Mode
+easyButton.addEventListener("click", function () {
+    //toggle select format for easy and hard button
+    easyButton.classList.add("selected");
+    hardButton.classList.remove("selected");
+    numSquares=3;
+    reset();
+});
+
+//For Hard Mode
+hardButton.addEventListener("click", function () {
+    easyButton.classList.remove("selected");
+    hardButton.classList.add("selected"); 
+    numSquares=6;
+    reset();
+});
+
+
+//Reset Button and get New Colors
+resetButton.addEventListener("click", function () {
+    reset();
+    //Change the text of reset button after correct guess
+    resetButton.textContent = "New Colors";
 });
 
 //Pick the correct answer color from arrray
