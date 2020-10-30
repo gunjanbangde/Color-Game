@@ -1,9 +1,46 @@
-var colors = generateArrayOfRandomColor(6);
+var numSquares=6;
+var colors = generateArrayOfRandomColor(numSquares);
 var pickedColor = pickColorFromArray();
 var squares = document.getElementsByClassName("square");
 var colorDisplay = document.getElementById("colorDisplay");
 var displayMessage = document.getElementById("displayMessage");
 var resetButton = document.querySelector("#reset");
+var easyButton = document.getElementById("easyButton");
+var hardButton = document.getElementById("hardButton");
+
+easyButton.addEventListener("click", function () {
+    easyButton.classList.add("selected");
+    hardButton.classList.remove("selected");
+    document.querySelector("h1").style.backgroundColor = "#232323";
+    numSquares=3;
+    colors = generateArrayOfRandomColor(numSquares);
+    pickedColor = pickColorFromArray();
+    colorDisplay.textContent = pickedColor;
+    displayMessage.textContent = "";
+    for (var i = 0; i < squares.length; i++) {
+        if (colors[i]) {
+            squares[i].style.backgroundColor = colors[i];
+        }
+        else {
+            squares[i].style.display = "none";
+        }
+    }
+});
+hardButton.addEventListener("click", function () {
+    easyButton.classList.remove("selected");
+    hardButton.classList.add("selected"); 
+    document.querySelector("h1").style.backgroundColor = "#232323";
+    numSquares=6;
+    colors = generateArrayOfRandomColor(numSquares);
+    pickedColor = pickColorFromArray();
+    colorDisplay.textContent = pickedColor;
+    displayMessage.textContent = "";
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
+        squares[i].style.display = "block";
+
+    }
+});
 
 colorDisplay.textContent = pickedColor;
 
@@ -37,7 +74,7 @@ for (var i = 0; i < squares.length; i++) {
 //Reset Button and get New Colors
 resetButton.addEventListener("click", function () {
     //Generate new colors
-    colors = generateArrayOfRandomColor(6);
+    colors = generateArrayOfRandomColor(numSquares);
     //Appy new colors to squares
     for (var i = 0; i < squares.length; i++) {
         squares[i].style.backgroundColor = colors[i];
@@ -50,6 +87,7 @@ resetButton.addEventListener("click", function () {
     colorDisplay.textContent = pickedColor;
     //Reset the heading color for new gamr after correct guess
     document.querySelector("h1").style.backgroundColor = "#232323";
+    displayMessage.textContent = "";
 });
 
 //Pick the correct answer color from arrray
